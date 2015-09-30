@@ -1,0 +1,5 @@
+node_modules/
+pics/
+*.log
+personal-info.js
+.idea/

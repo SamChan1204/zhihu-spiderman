@@ -1,0 +1,21 @@
+{
+  "name": "zhihu-spiderman",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SamChan1204/zhihu-spiderman.git"
+  },
+  "dependencies": {
+    "superagent": "*",
+    "sync-request": "*",
+    "cheerio": "*",
+    "mkdirp": "*",
+    "html-entities": "*",
+    "lodash": "*",
+    "co": "*"
+  },
+  "scripts": {
+    "start": "node --harmony app.js"
+  }
+}
