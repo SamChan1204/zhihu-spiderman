@@ -15,6 +15,8 @@ const personalInfo = require('./personal-info');
 const site = 'http://www.zhihu.com';
 const entities = new Entities();
 
+let total = 0;
+
 if (!fs.existsSync('./pics')) {
   mkdirp('./pics', function (err) {
     if (err) {
@@ -78,6 +80,8 @@ function loadPicturesInAnswer($, answer, title) {
     let src = $(e).attr('src') || $(e).attr('data-actualsrc');
     if (src.indexOf('http') >= 0) {
       let filename = `./pics/${title}/${username}-${aid}-${_.last(src.split('/'))}`;
+      total++;
+      console.log(`Total: ${total}`);
       if (!fs.existsSync(filename)) {
         console.log(`Filename - ${filename}`);
         let res = request('GET', src, {
@@ -169,6 +173,8 @@ function loadPicturesInCollection($, imgs, title, aid, username) {
     let src = $(e).attr('src') || $(e).attr('data-actualsrc');
     if (src.indexOf('http') >= 0) {
       let filename = `./pics/${title}/${username}-${aid}-${_.last(src.split('/'))}`;
+      total++;
+      console.log(`Total: ${total}`);
       if (!fs.existsSync(filename)) {
         console.log(`Filename - ${filename}`);
         let res = request('GET', src, {
