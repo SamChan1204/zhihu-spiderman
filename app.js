@@ -55,7 +55,7 @@ function requestImagesInQuestion(id) {
       console.log('Load question fail.');
     } else {
       let $ = cheerio.load(result);
-      let questionTitle = entities.decode($('#zh-question-title h2').html()).replace(/^<a*a>$/g, '').replace(/\n/g, '').replace(/\r/g, '').replace(/\//g, '-');
+      let questionTitle = entities.decode($('#zh-question-title h2').html() || '其它').replace(/^<a*a>$/g, '').replace(/\n/g, '').replace(/\r/g, '').replace(/\//g, '-');
       batchLoadImagesInAnswers($, questionTitle, $('.zm-item-answer'));
     }
   });
@@ -113,7 +113,7 @@ function requestImagesInAnswer(answer) {
       throw err;
     } else {
       let $ = cheerio.load(result);
-      let questionTitle = entities.decode($('#zh-question-title h2 a').html()).replace(/\n/g, '').replace(/\r/g, '').replace('/', '-');
+      let questionTitle = entities.decode($('#zh-question-title h2 a').html() || '其它').replace(/\n/g, '').replace(/\r/g, '').replace('/', '-');
       batchLoadImagesInAnswers($, questionTitle, $('#zh-question-answer-wrap .zm-item-answer'));
     }
   });
@@ -153,7 +153,7 @@ function requestImagesInCollectionByPage(id, pageNum) {
       let questionTitle;
       answers.each((i, e) => {
         questionTitle = entities.decode($(e).find('.zm-item-title a').html() || questionTitle).replace(/\n/g, '').replace(/\r/g, '').replace('/', '-');
-        let hidden = $(e).find('.zm-item-fav .zm-item-answer textarea.content.hidden').html();
+        let hidden = $(e).find('.zm-item-fav .zm-item-answer textarea.content.hidden').html() || '';
         let realContent = cheerio.load(entities.decode(hidden));
         let aid = $(e).find('.zm-item-fav .zm-item-answer').attr('data-aid');
         let username = entities.decode($(e).find('.zm-item-fav h3.zm-item-answer-author-wrap a').html() || '其它');
